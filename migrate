@@ -1,0 +1,7 @@
+read -e -p "Informe o nome do usuário: " USER
+
+read -e -p "Informe a senha: " PASSWORD
+
+/opt/flyway-3.1/flyway migrate -user=$USER -password=$PASSWORD -url=jdbc:mysql://localhost:3306/erp -locations=filesystem:/erp/flyway/db/migration
+
+/opt/flyway-3.1/flyway migrate -user=$USER -password=$PASSWORD -url=jdbc:mysql://localhost:3306/erp_audit -locations=filesystem:/erp/flyway/db/migration_audit

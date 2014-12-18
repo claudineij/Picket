@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   JBoss, Home of Professional Open Source
+   Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+   contributors by the @authors tag. See the copyright.txt in the 
+   distribution for a full listing of individual contributors.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,  
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+  -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+  <p>
+    This quickstart demonstrates the Persistent Permissions (i.e. ACLs) features provided by PicketLink.
+  </p>
+
+  <ui:fragment rendered="#{identity.loggedIn}">
+      <div>Congratulations! You are currently logged in as: <b>#{identity.account.loginName}</b></div>
+
+      <h:form>
+          <h:commandButton id="logout" value="Log out" action="#{identity.logout}"/>
+      </h:form>
+  </ui:fragment>
+
+  <h:form id="loginForm" rendered="#{not identity.loggedIn}">
+      <h:messages globalOnly="true"/>
+
+      <div class="loginRow">
+          <h:outputLabel for="name" value="Username" styleClass="loginLabel"/>
+          <h:inputText id="name" value="#{loginCredentials.userId}"/>
+      </div>
+
+      <div class="loginRow">
+          <h:outputLabel for="password" value="Password" styleClass="loginLabel"/>
+          <h:inputSecret id="password" value="#{loginCredentials.password}" redisplay="true"/>
+      </div>
+
+      <div class="loginRow">
+
+      </div>
+
+      <div class="buttons">
+          <h:commandButton id="login" value="Login" action="#{loginPLController.login}" styleClass="loginButton"/>
+      </div>
+
+      <p>
+        Tip: you can login with any of the following username/password combinations:
+        <div>john/demo</div>
+        <div>mary/demo</div>
+      </p>  
+
+  </h:form>
+
+
+  <ui:fragment rendered="#{identity.loggedIn}">
+
+    <h3>Articles</h3>
+    
+    <ui:fragment rendered="#{empty articleController.articles}">
+      <p>No articles exist - why don't you create one?</p>
+    </ui:fragment>
+
+    <h:messages/>
+
+    <h:form>
+        <h:dataTable value="#{articleController.articles}" var="article" rendered="#{not empty articleController.articles}"
+                border="1">
+            <h:column>
+                <f:facet name="header">Title</f:facet>
+                #{article.title}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Author</f:facet>
+                #{article.author}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <h:outputText value="#{identity.hasPermission(article, 'update')}"> </h:outputText>
+                <h:commandLink action="${articleController.showUpdate(article)}" rendered="#{identity.hasPermission(Article.class, 'update')}">[Edit]</h:commandLink>
+                <h:commandLink action="${articleController.delete(article)}">[Delete]</h:commandLink>
+            </h:column>
+        </h:dataTable>
+        <br/>
+        <div>
+            <h:commandLink value="Create new article" action="#{articleController.showCreate}"/>
+        </div>
+    </h:form>
+
+  </ui:fragment>    
+
+  <br style="clear:both"/>
+
+</html>

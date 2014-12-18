@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+	<html  xmlns="http://www.w3.org/1999/xhtml"
+		   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		   xmlns:f="http://xmlns.jcp.org/jsf/core"
+		   xmlns:h="http://xmlns.jcp.org/jsf/html"
+		   xmlns:p="http://primefaces.org/ui">
+	<h:body>
+		<ui:composition template="/template/template.xhtml">
+			<ui:param name="headerTitle" value="#{profile.title}" />
+			<ui:define name="breadCrumbCustom">
+				<li class="active">
+					<h:outputText value="#{profile.title}" />
+				</li>
+			</ui:define>
+
+			<ui:define name="outputScript">
+				<h:outputScript name="jquery.passwordStrength.js" library="js" />
+			</ui:define>
+			<ui:define name="outputScriptInline">
+				$.extend($.passwordStrength.messages, {
+					title: "#{text['password.requisite.plural']}",
+					letter: $.passwordStrength.format("#{text['letter.required']}"),
+					capital: $.passwordStrength.format("#{text['capital.required']}"),
+					number: $.passwordStrength.format("#{text['number.required']}"),
+					minlength: $.passwordStrength.format("#{text['minLength']}"),
+					maxlength: $.passwordStrength.format("#{text['maxLength']}"),
+					username: "#{text['noUsername']}"
+				});
+
+				$('#newPassword').passwordStrength();
+				$(document).on('pfAjaxComplete', function() {
+					$('#newPassword').passwordStrength();
+				});
+			</ui:define>
+
+			<ui:define name="content">
+				<div class="font-size-14">
+					<h3 class="header smaller lighter green">#{text['personalInformation.plural']}</h3>
+
+					<p class="row">
+						<span class="text-right col-sm-2">#{text.name}:</span>
+						<span class="col-sm-10">#{profileController.user.fullName}</span>
+					</p>
+					<p class="row">
+						<span class="text-right col-sm-2">#{text.name}:</span>
+						<span class="col-sm-10">#{profileController.user.username}</span>
+					</p>
+
+
+					<p class="row">
+						<span class="text-right col-sm-2">#{text.email}:</span>
+						<span class="col-sm-10">#{profileController.user.email}
+							<h:outputText rendered="#{empty profileController.user.email}" value="#{text.uninformed}" />
+						</span>
+					</p>
+				</div>
+
+				<h3 class="header smaller lighter green">#{text.changeYourPassword}</h3>
+				<h:form id="frm_change_password" styleClass="form-horizontal" prependId="false">
+					<p:messages id="change_password_error" redisplay="false" />
+					<h:inputHidden value="#{profileController.user.username}" id="username" />
+
+					<div class="form-group">
+						<p:outputLabel styleClass="col-sm-2 control-label no-padding-right text-right" for="oldPassword" value="#{text['password.old']}:" />
+						<div class="col-sm-10">
+							<p:password id="oldPassword" label="#{text['password.old']}" value="#{profileController.oldPassword}"
+								required="true" requiredMessage="#{text['password.old']} #{text.required}"
+								tabindex="1" styleClass="input-large" />
+							<p:message for="oldPassword" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<p:outputLabel styleClass="col-sm-2 control-label no-padding-right text-right" for="newPassword" value="#{text['password.new']}:" />
+						<div class="col-sm-10">
+							<p:password id="newPassword" label="#{text['password.new']}" value="#{profileController.newPassword}"
+								required="true" requiredMessage="#{text['password.new']} #{text.required}"
+								tabindex="2" styleClass="input-large {capital:0, username:'#username'}">
+								<f:validator validatorId="passwordValidator" />
+								<f:attribute name="capital" value="0" />
+								<f:attribute name="username" value="username" />
+							</p:password>
+							<p:message for="newPassword" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<p:outputLabel styleClass="col-sm-2 control-label no-padding-right text-right" for="confirmNewPassword" value="#{text['password.new.confirm']}:" />
+						<div class="col-sm-10">
+							<p:password id="confirmNewPassword" label="#{text['password.new.confirm']}" value="#{profileController.confirmNewPassword}"
+								required="true" requiredMessage="#{text['password.new.confirm']} #{text.required}"
+								tabindex="3" styleClass="input-large">
+								<f:validator validatorId="equalToValidator" />
+								<f:attribute name="field" value="newPassword" />
+							</p:password>
+							<p:message for="confirmNewPassword" />
+						</div>
+					</div>
+
+					<div class="clearfix form-actions">
+						<div class="col-md-offset-2">
+							<p:commandButton value="#{text.save}" actionListener="#{profileController.updateListener()}"
+									update="frm_change_password" styleClass="btn btn-success icon-ok" />
+		
+							<p:commandButton value="#{text.clear}" immediate="true" actionListener="#{profileController.clearListener()}"
+								update="frm_change_password" styleClass="btn icon-undo margin-left-15" />
+						</div>
+					</div>
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

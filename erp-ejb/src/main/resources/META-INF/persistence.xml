@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+			 xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="ERP-PU" transaction-type="JTA">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<jta-data-source>java:/datasources/ERP</jta-data-source>
+
+		<class>br.com.waio.erp.ejb.entity.identity.entity.AbstractIdentityTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.ApplicationAccessTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.ApplicationRealmTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.ApplicationTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.GrantTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.GroupMembershipTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.PartitionTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.GroupTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.PasswordCredentialTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.RealmTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.RelationshipIdentityTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.RelationshipTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.RoleTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.UserTypeEntity</class>
+
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+
+			<!-- Configuração de auditoria -->
+			<property name="org.hibernate.envers.revision_field_name" value="revision_id" />
+			<property name="org.hibernate.envers.revision_type_field_name" value="revision_type" />
+			<property name="org.hibernate.envers.audit_table_suffix" value="_aud" />
+			<property name="org.hibernate.envers.default_schema" value="erp_audit" />
+		</properties>
+	</persistence-unit>
+</persistence>

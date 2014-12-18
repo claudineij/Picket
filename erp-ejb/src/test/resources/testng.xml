@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ERPSytemSuiteEJB">
+	<test name="ALL">
+		<packages>
+			<package name="br.com.waio.erp.ejb.*" />
+		</packages>
+	</test>
+</suite>
