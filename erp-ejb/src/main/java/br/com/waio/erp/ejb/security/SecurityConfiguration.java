@@ -22,7 +22,7 @@ import br.com.waio.erp.ejb.entity.identity.ApplicationRealm;
 import br.com.waio.erp.ejb.entity.identity.Grant;
 import br.com.waio.erp.ejb.entity.identity.Group;
 import br.com.waio.erp.ejb.entity.identity.GroupMembership;
-import br.com.waio.erp.ejb.entity.identity.Realm;
+import br.com.waio.erp.ejb.entity.identity.ERPRealm;
 import br.com.waio.erp.ejb.entity.identity.Role;
 import br.com.waio.erp.ejb.entity.identity.User;
 import org.picketlink.config.SecurityConfigurationBuilder;
@@ -46,7 +46,7 @@ public class SecurityConfiguration {
             .named("default")
                 .stores()
                     .jpa()
-            .supportType(User.class, Role.class, Group.class, Realm.class, Application.class, ApplicationRealm.class)
+            .supportType(User.class, Role.class, Group.class, ERPRealm.class, Application.class, ApplicationRealm.class)
             .supportGlobalRelationship(Grant.class, GroupMembership.class, ApplicationAccess.class)
             .supportPermissions(true)
             .supportCredentials(true);

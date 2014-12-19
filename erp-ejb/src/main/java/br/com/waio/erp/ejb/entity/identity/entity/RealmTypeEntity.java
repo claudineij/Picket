@@ -27,7 +27,7 @@ import javax.persistence.Entity;
 import org.picketlink.idm.jpa.annotations.AttributeValue;
 import org.picketlink.idm.jpa.annotations.entity.IdentityManaged;
 
-import br.com.waio.erp.ejb.entity.identity.Realm;
+import br.com.waio.erp.ejb.entity.identity.ERPRealm;
 
 /**
  * <p>Entity with the mapping for {@link org.picketlink.quickstart.identitymodel.Realm}.</p>
@@ -35,7 +35,7 @@ import br.com.waio.erp.ejb.entity.identity.Realm;
  * @author Pedro Igor
  */
 
-@IdentityManaged(Realm.class)
+@IdentityManaged(ERPRealm.class)
 @Entity
 public class RealmTypeEntity extends PartitionTypeEntity {
 

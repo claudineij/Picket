@@ -1,7 +1,7 @@
 package br.com.waio.erp.ejb.security;
 
 import br.com.waio.erp.ejb.entity.Article;
-import br.com.waio.erp.ejb.entity.identity.Realm;
+import br.com.waio.erp.ejb.entity.identity.ERPRealm;
 import org.picketlink.annotations.PicketLink;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
@@ -22,14 +22,14 @@ public class PartitionInitializer {
     public static final String DEFAULT_PARTITION_NAME = "default";
     @Inject
     private PartitionManager partitionManager;
-    private Realm defaultPartition;
+    private ERPRealm defaultPartition;
 
     @PostConstruct
     public void onInit() {
-        this.defaultPartition = this.partitionManager.getPartition(Realm.class, DEFAULT_PARTITION_NAME);
+        this.defaultPartition = this.partitionManager.getPartition(ERPRealm.class, DEFAULT_PARTITION_NAME);
 
         if (this.defaultPartition == null) {
-            this.defaultPartition = new Realm(DEFAULT_PARTITION_NAME);
+            this.defaultPartition = new ERPRealm(DEFAULT_PARTITION_NAME);
 
             this.partitionManager.add(this.defaultPartition);
 

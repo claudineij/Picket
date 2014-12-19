@@ -17,8 +17,6 @@
 package br.com.waio.erp.web.controller;
 
 import org.picketlink.Identity;
-import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.PermissionManager;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -38,17 +36,11 @@ public class LoginPLController {
     @Inject
     private Identity identity;
 
-    @Inject
-    private IdentityManager identityManager;
-
-    @Inject
-    private PermissionManager permissionManager;
-
     public void login() {
         this.identity.login();
 
         if (this.identity.isLoggedIn()) {
-            System.out.print(1);
+            // user logged in
         }
     }
 }

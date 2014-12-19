@@ -34,7 +34,7 @@ import org.picketlink.idm.model.annotation.IdentityPartition;
  * @author Pedro Igor
  */
 @IdentityPartition(supportedTypes = {Application.class, User.class, Role.class, Group.class})
-public class Realm extends AbstractPartition {
+public class ERPRealm extends AbstractPartition {
 
     @AttributeProperty
     private boolean enforceSSL;
@@ -49,11 +49,11 @@ public class Realm extends AbstractPartition {
     private byte[] privateKey;
 
     // PicketLink requires a default constructor to create and populate instances using reflection
-    private Realm() {
+    private ERPRealm() {
         this(null);
     }
 
-    public Realm(String name) {
+    public ERPRealm(String name) {
         super(name);
     }
 
