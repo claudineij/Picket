@@ -38,7 +38,7 @@
 		<version.primefaces>5.1</version.primefaces>
 		<version.primefaces.extensions>2.1.0</version.primefaces.extensions>
 		<version.picketbox>4.0.21.Final</version.picketbox>
-		<version.picketlink.bom>2.7.0-SNAPSHOT</version.picketlink.bom>
+		<version.picketlink.bom>2.7.0.CR2</version.picketlink.bom>
 
 		<!-- Versão das dependências do teste -->
 		<version.jacoco>0.7.1.201405082137</version.jacoco>

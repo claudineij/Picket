@@ -38,6 +38,7 @@
 			<property name="org.hibernate.envers.revision_type_field_name" value="revision_type" />
 			<property name="org.hibernate.envers.audit_table_suffix" value="_aud" />
 			<property name="org.hibernate.envers.default_schema" value="erp_audit" />
+			<property name="hibernate.bytecode.use_reflection_optimizer" value="false"/>
 		</properties>
 	</persistence-unit>
 </persistence>
