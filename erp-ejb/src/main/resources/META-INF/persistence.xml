@@ -6,7 +6,7 @@
 
 	<persistence-unit name="ERP-PU" transaction-type="JTA">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<jta-data-source>java:/datasources/ERP</jta-data-source>
+		<jta-data-source>java:/jboss/datasources/ExampleDS</jta-data-source>
 
 		<class>br.com.waio.erp.ejb.entity.identity.entity.AbstractIdentityTypeEntity</class>
 		<class>br.com.waio.erp.ejb.entity.identity.entity.ApplicationAccessTypeEntity</class>
@@ -22,12 +22,13 @@
 		<class>br.com.waio.erp.ejb.entity.identity.entity.RelationshipTypeEntity</class>
 		<class>br.com.waio.erp.ejb.entity.identity.entity.RoleTypeEntity</class>
 		<class>br.com.waio.erp.ejb.entity.identity.entity.UserTypeEntity</class>
+		<class>br.com.waio.erp.ejb.entity.identity.entity.PermissionTypeEntity</class>
 
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 
 		<properties>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

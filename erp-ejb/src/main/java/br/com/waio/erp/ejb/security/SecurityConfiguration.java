@@ -14,13 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.waio.erp.web.controller;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-
-import org.picketlink.config.SecurityConfigurationBuilder;
-import org.picketlink.event.SecurityConfigurationEvent;
+package br.com.waio.erp.ejb.security;
 
 import br.com.waio.erp.ejb.entity.identity.Application;
 import br.com.waio.erp.ejb.entity.identity.ApplicationAccess;
@@ -31,6 +25,11 @@ import br.com.waio.erp.ejb.entity.identity.GroupMembership;
 import br.com.waio.erp.ejb.entity.identity.Realm;
 import br.com.waio.erp.ejb.entity.identity.Role;
 import br.com.waio.erp.ejb.entity.identity.User;
+import org.picketlink.config.SecurityConfigurationBuilder;
+import org.picketlink.event.SecurityConfigurationEvent;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Observes;
 
 /**
  * This bean produces the configuration for PicketLink IDM
@@ -49,7 +48,8 @@ public class SecurityConfiguration {
                     .jpa()
             .supportType(User.class, Role.class, Group.class, Realm.class, Application.class, ApplicationRealm.class)
             .supportGlobalRelationship(Grant.class, GroupMembership.class, ApplicationAccess.class)
-            .supportAllFeatures();
+            .supportPermissions(true)
+            .supportCredentials(true);
     }
 
 }

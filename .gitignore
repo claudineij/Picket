@@ -1,43 +1,66 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+<<<<<<< HEAD
+target/
+.settings/
+.classpath
+.project
+=======
+# ignore .svn metadata files
+.svn
+# ignore Maven generated target folders
+~
+target
+# ignore eclipse files
+.project
+.classpath
+.settings
+.metadata
+.externalToolBuilders
+# ignore IDEA files
+*.iml
+*.ipr
+*.iws
+.idea
+# ignore NetBeans files
+nbactions.xml
+nb-configuration.xml
+catalog.xml
+#
+maven-ant-tasks.jar
+test-output
+transaction.log
+# vim files
+*.swp
+/.gitk-tmp.*
+atlassian-ide-plugin.xml
+# temp files
+*~
+# maven versions plugin
+pom.xml.versionsBackup
+# hprof dumps
+/*.hprof
+# ignore 'randomly' strewn around logs
+server.log
+# ignore java crashes
+hs_err_pid*.log
+# H2 databases produced by tests
+*.h2.db
+# JBoss transaction generated files
+PutObjectStoreDirHere
+# ignore mvn-rpmbuild repo
+/.m2
+#ignore opends lock files
+*.lock
+.checkstyle
+>>>>>>> 4f57b5ac814ef83c771544361f53e116da83e96c
+# Files produced by the Maven Release Plugin
+release.properties
+# Files produced by the Eclipse annotations processor
+.factorypath
+# Files produced by the release script
+pl-release.log
+# temp
+*.patch
+picketlink-core
+picketlink-bindings
+#maven shade plugin generated
+dependency-reduced-pom.xml

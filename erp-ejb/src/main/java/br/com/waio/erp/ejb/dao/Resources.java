@@ -16,40 +16,29 @@
  */
 package br.com.waio.erp.ejb.dao;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.picketlink.annotations.PicketLink;
-
-import br.com.waio.erp.ejb.Constant;
-
 /**
  * This class uses CDI to alias Java EE resources, such as the {@link javax.faces.context.FacesContext}, to CDI beans
- * 
+ *
  * <p>
  * Example injection on a managed bean field:
  * </p>
- * 
+ *
  * <pre>
  * &#064;Inject
  * private FacesContext facesContext;
  * </pre>
  */
-@ApplicationScoped
 public class Resources {
 
-    @Produces
-    @PicketLink
-    @PersistenceContext(unitName = Constant.PU)
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Produces
-    @RequestScoped
-    public FacesContext produceFacesContext() {
-        return FacesContext.getCurrentInstance();
+    public EntityManager produceEntityManager() {
+        return this.entityManager;
     }
 }

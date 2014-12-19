@@ -16,85 +16,39 @@
  */
 package br.com.waio.erp.web.controller;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
-import javax.inject.Inject;
-
 import org.picketlink.Identity;
 import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.PermissionManager;
-import org.picketlink.idm.credential.Password;
 
-import br.com.waio.erp.ejb.entity.Article;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * We control the authentication process from this action bean, so that in the event of a failed authentication we can add an
  * appropriate FacesMessage to the response.
- * 
+ *
  * @author Shane Bryzak
- * 
+ *
  */
-@Model
+@Named
+@Stateless
 public class LoginPLController {
 
     @Inject
     private Identity identity;
 
     @Inject
-    PartitionManager partitionManager;
+    private IdentityManager identityManager;
 
-/*
     @Inject
-    private FacesContext facesContext;
-*/
-
-    @PostConstruct
-    public void createData() {
-        // Create user john
-        br.com.waio.erp.ejb.entity.identity.User john = new br.com.waio.erp.ejb.entity.identity.User("john");
-/*
-        john.setEmail("john@acme.com");
-        john.setFirstName("John");
-        john.setLastName("Smith");
-*/
-
-        IdentityManager identityManager = this.partitionManager.createIdentityManager();
-
-        identityManager.add(john);
-        identityManager.updateCredential(john, new Password("demo"));
-
-        // Create user mary
-        br.com.waio.erp.ejb.entity.identity.User mary = new br.com.waio.erp.ejb.entity.identity.User("mary");
-/*
-        mary.setEmail("mary@acme.com");
-        mary.setFirstName("Mary");
-        mary.setLastName("Jones");
-*/
-        identityManager.add(mary);
-        identityManager.updateCredential(mary, new Password("demo"));
-
-
-        PermissionManager permissionManager = partitionManager.createPermissionManager();
-
-        // Grant both john and mary permission to create new articles
-        permissionManager.grantPermission(john, Article.class, "create");
-        permissionManager.grantPermission(john, Article.class, "update");
-        permissionManager.grantPermission(john, Article.class, "delete");
-        permissionManager.grantPermission(mary, Article.class, "create");
-    }
-
+    private PermissionManager permissionManager;
 
     public void login() {
         this.identity.login();
 
         if (this.identity.isLoggedIn()) {
-/*
-            facesContext.addMessage(
-                    null,
-                    new FacesMessage("Authentication was unsuccessful.  Please check your username and password "
-                            + "before trying again."));
-*/
+            System.out.print(1);
         }
     }
 }

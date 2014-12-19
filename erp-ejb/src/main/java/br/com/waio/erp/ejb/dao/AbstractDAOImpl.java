@@ -1,17 +1,26 @@
 package br.com.waio.erp.ejb.dao;
 
-import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import br.com.waio.erp.ejb.dto.Filter;
+import br.com.waio.erp.ejb.dto.Join;
+import br.com.waio.erp.ejb.dto.Pagination;
+import br.com.waio.erp.ejb.dto.Sort;
+import br.com.waio.erp.ejb.enums.Restriction;
+import br.com.waio.erp.ejb.enums.SortOrder;
+import br.com.waio.erp.ejb.util.Messages;
+import br.com.waio.erp.util.DirectPropertyAccessor;
+import br.com.waio.erp.util.Validator;
+import br.com.waio.erp.util.exception.ChangeCollisionException;
+import br.com.waio.erp.util.exception.ERPConstraintViolationException;
+import br.com.waio.erp.util.exception.FieldInvalidException;
+import br.com.waio.erp.util.exception.ObjectEmptyException;
+import br.com.waio.erp.util.exception.ObjectExistsException;
+import br.com.waio.erp.util.exception.ObjectNotFoundException;
+import br.com.waio.erp.util.exception.PropertyException;
+import org.apache.log4j.Logger;
+import org.hibernate.StaleObjectStateException;
+
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
@@ -25,28 +34,19 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.apache.log4j.Logger;
-import org.hibernate.StaleObjectStateException;
-
-import br.com.waio.erp.ejb.Constant;
-import br.com.waio.erp.ejb.dto.Filter;
-import br.com.waio.erp.ejb.dto.Join;
-import br.com.waio.erp.ejb.dto.Pagination;
-import br.com.waio.erp.ejb.dto.Sort;
-import br.com.waio.erp.ejb.enums.Restriction;
-import br.com.waio.erp.ejb.enums.SortOrder;
-import br.com.waio.erp.ejb.util.Messages;
 //import br.com.waio.erp.ejb.validator.ValidatorConstraint;
-import br.com.waio.erp.util.DirectPropertyAccessor;
-import br.com.waio.erp.util.Validator;
-import br.com.waio.erp.util.exception.ChangeCollisionException;
-import br.com.waio.erp.util.exception.ERPConstraintViolationException;
-import br.com.waio.erp.util.exception.FieldInvalidException;
-import br.com.waio.erp.util.exception.ObjectEmptyException;
-import br.com.waio.erp.util.exception.ObjectExistsException;
-import br.com.waio.erp.util.exception.ObjectNotFoundException;
-import br.com.waio.erp.util.exception.PropertyException;
 
 /**
  * Implementação genérica do DAO.
@@ -63,7 +63,7 @@ public abstract class AbstractDAOImpl<T extends Serializable, I> implements Abst
 	/**
 	 * Obtendo o {@link EntityManager} injetado pelo {@link PersistenceContext} EntityManager
 	 */
-	@PersistenceContext(unitName = Constant.PU)
+	@Inject
 	private transient EntityManager em;
 
 	/**
