@@ -17,7 +17,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jacoco:org.jacoco.core:0.7.1.201405082137" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.asm:asm-debug-all:5.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.picketlink:picketlink:2.7.0.CR2" level="project" />
+    <orderEntry type="library" name="Maven: org.picketlink:picketlink:2.7.0-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.testng:testng:6.8.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.beanshell:bsh:2.0b4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.beust:jcommander:1.27" level="project" />
