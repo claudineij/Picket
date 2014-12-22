@@ -17,26 +17,26 @@
  */
 package br.com.waio.erp.web.controller;
 
-import java.io.Serializable;
-import java.util.List;
-import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.picketlink.Identity;
-import org.picketlink.authorization.annotations.RequiresPermission;
-import org.picketlink.idm.PermissionManager;
-import org.picketlink.idm.model.basic.User;
-
 import br.com.waio.erp.ejb.dao.ArticleDAO;
 import br.com.waio.erp.ejb.entity.Article;
+import br.com.waio.erp.ejb.entity.identity.User;
 import br.com.waio.erp.util.exception.ChangeCollisionException;
 import br.com.waio.erp.util.exception.FieldInvalidException;
 import br.com.waio.erp.util.exception.ObjectEmptyException;
 import br.com.waio.erp.util.exception.ObjectExistsException;
 import br.com.waio.erp.util.exception.ObjectNotFoundException;
+import org.picketlink.Identity;
+import org.picketlink.authorization.annotations.RequiresPermission;
+import org.picketlink.idm.PermissionManager;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateful;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Action bean for Article related operations
@@ -45,7 +45,7 @@ import br.com.waio.erp.util.exception.ObjectNotFoundException;
  * @author Pedro Igor
  */
 @Named
-//@Stateful
+@Stateful
 @ConversationScoped
 public class ArticleController implements Serializable {
 
@@ -91,7 +91,7 @@ public class ArticleController implements Serializable {
 
     public String create() {
         User user = (User) identity.getAccount();
-        article.setAuthor(user.getFirstName() + " " + user.getLastName());
+        article.setAuthor(user.getUserName());
         try {
             articleDAO.save(article);
         } catch (ObjectEmptyException e) {

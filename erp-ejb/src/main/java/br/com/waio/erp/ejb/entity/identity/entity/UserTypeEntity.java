@@ -21,15 +21,13 @@
  */
 package br.com.waio.erp.ejb.entity.identity.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-
+import br.com.waio.erp.ejb.entity.identity.User;
 import org.picketlink.idm.jpa.annotations.AttributeValue;
 import org.picketlink.idm.jpa.annotations.OwnerReference;
 import org.picketlink.idm.jpa.annotations.entity.IdentityManaged;
 
-import br.com.waio.erp.ejb.entity.identity.User;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 
 /**
@@ -45,7 +43,7 @@ public class UserTypeEntity extends AbstractIdentityTypeEntity {
     private String userName;
 
     @OwnerReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private RealmTypeEntity realm;
 
     public String getUserName() {

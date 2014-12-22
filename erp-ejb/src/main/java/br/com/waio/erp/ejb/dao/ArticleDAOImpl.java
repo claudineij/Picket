@@ -1,9 +1,9 @@
 package br.com.waio.erp.ejb.dao;
 
+import br.com.waio.erp.ejb.entity.Article;
+
 import javax.ejb.Local;
 import javax.ejb.Stateless;
-
-import br.com.waio.erp.ejb.entity.Article;
 
 /**
  * Implementação para manipulação de dados do cargo.
@@ -20,7 +20,7 @@ public class ArticleDAOImpl extends AbstractDAOImpl<Article, Long> implements Ar
 	 * Construtor.
 	 */
 	public ArticleDAOImpl() {
-		this.setFieldsIs(new String[] { "name" });
+		this.setFieldsIs(new String[] { "id" });
 	}
 
 }
